@@ -3,6 +3,10 @@ import { appConfig } from "./app-config";
 
 // DAL = Data Access Layer - The only one accessing the database.
 class DAL {
+
+    constructor(){
+        console.log("==  init db \n  =="+appConfig.herokuUri +"\n"+ appConfig.isProduction)
+    }
   private devConfigs: PoolOptions = {
     host: appConfig.mysqlHost,
     user: appConfig.mysqlUser,
@@ -13,6 +17,7 @@ class DAL {
   private prodConfigs: PoolOptions = {
     uri: appConfig.herokuUri,
   };
+
   // Database configuration:
   private options: PoolOptions = appConfig.isProduction
     ? this.prodConfigs
