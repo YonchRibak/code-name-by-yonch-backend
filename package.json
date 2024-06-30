@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start": "npm i && nodemon --exec ts-node src/app.ts --quiet"
+        "start": "ts-node src/app.ts",
+        "dev": "nodemon --exec ts-node src/app.ts --quiet"
     },
     "keywords": [],
     "author": "",
