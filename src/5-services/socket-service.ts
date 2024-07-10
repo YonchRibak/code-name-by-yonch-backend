@@ -55,6 +55,9 @@ class SocketService {
       });
       // Server listens to user closing a room:
       socket.on("closeRoom", (roomName: string) => {
+        console.log(`Emitting gameAborted for room: ${roomName}`);
+        socket.to(roomName).emit("gameAborted");
+        console.log(`game ${roomName} has been aborted!!!`);
         socketServer.socketsLeave(roomName);
         console.log(`Room ${roomName} has been closed`);
       });
@@ -63,7 +66,7 @@ class SocketService {
       socket.on("joinRoom", (roomName: string) => {
         if (socketServer.sockets.adapter.rooms.has(roomName)) {
           console.log(
-            "users is room: ",
+            "users in room: ",
             socketServer.sockets.adapter.rooms.get(roomName).size
           );
           // a user can only join a room if he submits an existing room name.
@@ -97,6 +100,7 @@ class SocketService {
           socket.disconnect();
         }
       });
+
       // Server listens to client disconnection:
       socket.on("disconnect", () => {
         console.log(`${socket.id} has been disconnected`);
